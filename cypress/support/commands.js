@@ -23,3 +23,13 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import loc from './locators'
+
+Cypress.Commands.add('requiredFieldsOK', (name, lastName, email, lorem)=>{
+    cy.get(loc.INPUT.NAME).type(name)
+    cy.get(loc.INPUT.LAST_NAME).type(lastName)
+    cy.get(loc.INPUT.EMAIL).type(email)
+    cy.get(loc.INPUT.COMMENT).type(lorem)
+    
+})
