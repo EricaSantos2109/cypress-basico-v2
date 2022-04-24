@@ -94,7 +94,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
             })
     })
 
-    it.only('should select a file drag-drop', () =>{
+    it('should select a file drag-drop', () =>{
         cy.get('input[type="file"]')
             .should('not.have.value')
             .selectFile('./cypress/fixtures/example.json', {action:'drag-drop'})
@@ -102,5 +102,14 @@ describe('Central de Atendimento ao Cliente TAT', () => {
                 expect($input[0].files[0].name).to.equal('example.json')
             })
     })
+    
+    it('verifies that the privacy policy opens in another tab without the need for a click', () =>{
+        cy.get('#privacy a').should('have.attr', 'target', '_blank')
+    })
 
+    it.only('should access the privacy policy page by removing the target and then clicking on the link', ()=>{
+        cy.get('#privacy a')
+            .invoke('removeAttr', 'target')
+            .click()
+    })
 })
