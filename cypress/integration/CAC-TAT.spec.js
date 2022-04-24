@@ -66,4 +66,41 @@ describe('Central de Atendimento ao Cliente TAT', () => {
             });    
           })
     })
+
+    it('should check a radio button ',  () => {
+        cy.get('input[type="radio"]')
+            .should('have.length', 3)
+            .each(function($radio){
+                cy.wrap($radio).check()
+                cy.wrap($radio).should('be.checked')
+            })
+    })
+
+    it('should check two checkboxes and after unchecked the last one', () =>{
+        cy.get('input[type="checkbox"]')
+            .check()
+            .should('be.checked')
+            .last()
+            .uncheck()
+            .should('not.be.checked')
+    })
+
+    it('should select a file from fixtures', () =>{
+        cy.get('input[type="file"]')
+            .should('not.have.value')
+            .selectFile('./cypress/fixtures/example.json')
+            .should(function($input){
+                expect($input[0].files[0].name).to.equal('example.json')
+            })
+    })
+
+    it.only('should select a file drag-drop', () =>{
+        cy.get('input[type="file"]')
+            .should('not.have.value')
+            .selectFile('./cypress/fixtures/example.json', {action:'drag-drop'})
+            .should(function($input){
+                expect($input[0].files[0].name).to.equal('example.json')
+            })
+    })
+
 })
