@@ -107,7 +107,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
         cy.get('#privacy a').should('have.attr', 'target', '_blank')
     })
 
-    it.only('should access the privacy policy page by removing the target and then clicking on the link', ()=>{
+    it('should access the privacy policy page by removing the target and then clicking on the link', ()=>{
         cy.get('#privacy a')
             .invoke('removeAttr', 'target')
             .click()
